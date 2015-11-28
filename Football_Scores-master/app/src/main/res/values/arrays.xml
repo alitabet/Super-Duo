@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- array list of league codes for leagues to include in to include in the APP -->
+    <!-- these codes change with time, they can be updated in the strings.xml file -->
+
+    <string-array name="list_league_code_array">
+        <item>@string/league_code_bundesliga1</item>
+        <item>@string/league_code_bundesliga2</item>
+        <item>@string/league_code_bundesliga3</item>
+        <item>@string/league_code_ligue1</item>
+        <item>@string/league_code_ligue2</item>
+        <item>@string/league_code_premier_league</item>
+        <item>@string/league_code_primera_division</item>
+        <item>@string/league_code_segunda_division</item>
+        <item>@string/league_code_primera_liga</item>
+        <item>@string/league_code_serie_a</item>
+        <item>@string/league_code_eredivisie</item>
+        <item>@string/league_code_champions_league</item>
+    </string-array>
+
+    <string-array name="list_league_name_array">
+        <item>@string/league_name_bundesliga1</item>
+        <item>@string/league_name_bundesliga2</item>
+        <item>@string/league_name_bundesliga3</item>
+        <item>@string/league_name_ligue1</item>
+        <item>@string/league_name_ligue2</item>
+        <item>@string/league_name_premier_league</item>
+        <item>@string/league_name_primera_divison</item>
+        <item>@string/league_name_segunda_divison</item>
+        <item>@string/league_name_primera_ligua</item>
+        <item>@string/league_name_seria_a</item>
+        <item>@string/league_name_eredivisie</item>
+        <item>@string/league_name_champions_league</item>
+    </string-array>
+</resources>

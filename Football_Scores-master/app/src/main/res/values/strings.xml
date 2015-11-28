@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+
+<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
 
     <string name="app_name">Football Scores</string>
     <string name="hello_world">Hello world!</string>
@@ -8,23 +9,12 @@
     <string name="today">Today</string>
     <string name="yesterday">Yesterday</string>
     <string name="tomorrow">Tomorrow</string>
-    <string name="champions_league">UEFA Champions League</string>
-    <string name="bundesliga">Bundesliga</string>
-    <string name="premierleague">Premier League</string>
-    <string name="primeradivison">Primera Division</string>
-    <string name="seriaa">Serie A</string>
-    <string name="matchday_text">Match day</string>
-    <string name="group_stage_text">Group stages</string>
-    <string name="first_knockout_round">First knockout round</string>
-    <string name="quarter_final">Quarter Final</string>
-    <string name="semi_final">Semi Final</string>
-    <string name="final_text">Final</string>
     <string name="share_text">Share</string>
     <string name="about">About</string>
     <string name="title_activity_about">AboutActivity</string>
     <string name="about_text">
-        This Application get Football Matches Score for the Premier League,Seria A,Bundesliga,Primera Division
-        and the Uefa Champions League.
+        This Application get Football Matches Score for the Premier League, Seria A, Bundesliga, Primera Division
+        and the UEFA Champions League.
         All Matches data are acquired from football-data.org free API.
         All team Logos are acquired from http://hdlogo.wordpress.com/ upon requesting permission form the owner.
         The original version of this app was created by Yahia Khalid Ibn El Walid Ahmed, and a modified version is given to students in the Udacity Android Nanodegree program.
@@ -33,6 +23,56 @@
         During the off season, fake data will be added to the app.
     </string>
     <string name="widget_text">This is a widget probably.</string>
-    <string name="api_key"></string>
     <string name="dummy_data">{\"timeFrameStart\":\"2015-06-18\",\"timeFrameEnd\":\"2015-06-19\",\"count\":1,\"fixtures\":[{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}}]}</string>
+
+    <!-- API related strings -->
+    <!-- BASE URL for Football Data API -->
+    <string name="base_url" translatable="false">http://api.football-data.org/alpha/fixtures</string>
+    <!-- API KEY (Not sure if it should be kept here) -->
+    <string name="api_key" translatable="false">af008aeb4f1d48fb9a58009b0d9a48e5</string>
+    <!-- The API Key query parameter -->
+    <string name="query_api_key" translatable="false">X-Auth-Token</string>
+    <!-- The timeFrame query parameter -->
+    <string name="query_time_frame" translatable="false">timeFrame</string>
+    <!-- Time frame possible parameters: n for next and p for previous -->
+    <string name="api_next_request" translatable="false">n<xliff:g id="days">%1$s</xliff:g></string>
+    <string name="api_previous_request" translatable="false">n<xliff:g id="days">%1$s</xliff:g></string>
+
+    <!-- League codes -->
+    <string name="league_code_bundesliga1" translatable="false">349</string>
+    <string name="league_code_bundesliga2" translatable="false">395</string>
+    <string name="league_code_bundesliga3" translatable="false">403</string>
+    <string name="league_code_ligue1" translatable="false">396</string>
+    <string name="league_code_ligue2" translatable="false">397</string>
+    <string name="league_code_premier_league" translatable="false">398</string>
+    <string name="league_code_primera_division" translatable="false">399</string>
+    <string name="league_code_segunda_division" translatable="false">400</string>
+    <string name="league_code_serie_a" translatable="false">401</string>
+    <string name="league_code_primera_liga" translatable="false">402</string>
+    <string name="league_code_eredivisie" translatable="false">404</string>
+    <string name="league_code_champions_league" translatable="false">405</string>
+
+    <!-- League names -->
+    <string name="league_name_bundesliga1" translatable="false">Bundesliga</string>
+    <string name="league_name_bundesliga2" translatable="false">Bundesliga</string>
+    <string name="league_name_bundesliga3" translatable="false">Bundesliga</string>
+    <string name="league_name_ligue1" translatable="false">League 1</string>
+    <string name="league_name_ligue2" translatable="false">League 2</string>
+    <string name="league_name_premier_league" translatable="false">Premier League</string>
+    <string name="league_name_primera_divison" translatable="false">Primera Division</string>
+    <string name="league_name_segunda_divison" translatable="false">Segunda Division</string>
+    <string name="league_name_seria_a" translatable="false">Serie A</string>
+    <string name="league_name_primera_ligua" translatable="false">Primeira Liga</string>
+    <string name="league_name_eredivisie" translatable="false">Eredivisie</string>
+    <string name="league_name_champions_league" translatable="false">UEFA Champions League</string>
+
+    <!-- Text for unknown league number -->
+    <string name="unknown_league_text_response">Not known League Please report</string>
+    <!-- Text for matchday info displaying -->
+    <string name="text_matchday">Matchday: <xliff:g id="day">%1$s</xliff:g></string>
+    <string name="text_cl_group_stages">Group Stages</string>
+    <string name="text_cl_first_knockout_round">First Knockout round</string>
+    <string name="text_cl_quarter_final">QuarterFinal</string>
+    <string name="text_cl_semi_final">SemiFinal</string>
+    <string name="text_cl_final">Final</string>
 </resources>

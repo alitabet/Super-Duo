@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="4dp"
@@ -19,7 +20,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:id="@+id/home_crest"/>
+                android:id="@+id/home_crest"
+                tools:src="@drawable/no_icon"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -27,7 +29,8 @@
                 android:textSize="@dimen/TeamNames"
                 android:gravity="center"
                 android:text="@string/test_text"
-                android:id="@+id/home_name"/>
+                android:id="@+id/home_name"
+                tools:text="Arsenal"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -42,7 +45,8 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textSize="@dimen/Score"
-                android:id="@+id/score_textview"/>
+                android:id="@+id/score_textview"
+                tools:text="-"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -50,7 +54,8 @@
                 android:text="@string/test_text"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:id="@+id/data_textview"/>
+                android:id="@+id/data_textview"
+                tools:text="10:00pm"/>
 
         </LinearLayout>
         <LinearLayout
@@ -62,7 +67,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:id="@+id/away_crest"/>
+                android:id="@+id/away_crest"
+                tools:src="@drawable/no_icon"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,7 +76,8 @@
                 android:gravity="center"
                 android:text="@string/test_text"
                 android:textSize="@dimen/TeamNames"
-                android:id="@+id/away_name"/>
+                android:id="@+id/away_name"
+                tools:text="Manchester City"/>
         </LinearLayout>
     </LinearLayout>
     <FrameLayout
