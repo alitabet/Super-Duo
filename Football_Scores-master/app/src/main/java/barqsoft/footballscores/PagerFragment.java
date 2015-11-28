@@ -61,6 +61,7 @@ public class PagerFragment extends Fragment
 
             final ActionBar ab = ((AppCompatActivity) getActivity()).getSupportActionBar();
             ab.setDisplayHomeAsUpEnabled(false);
+            ab.setDisplayShowTitleEnabled(false);
         }
     }
 
