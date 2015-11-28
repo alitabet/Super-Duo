@@ -7,11 +7,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".MainActivity$PlaceholderFragment">
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id = "@+id/scores_list"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="15sp"
-            />
+            android:id = "@+id/scores_list"/>
+            <!--android:divider="@android:color/transparent"-->
+            <!--android:dividerHeight="15sp"-->
+            <!--/>-->
 </FrameLayout>
