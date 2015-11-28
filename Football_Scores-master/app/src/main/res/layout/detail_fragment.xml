@@ -15,9 +15,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/League"
+            android:fontFamily="sans-serif-light"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:textColor="@color/primary_text"
+            android:textSize="18sp"
             tools:text="Premier League"/>
 
         <TextView
@@ -25,9 +27,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/League"
+            android:fontFamily="sans-serif-light"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:textColor="@color/primary_text"
+            android:textSize="18sp"
             tools:text="Matchday: 1" />
     </LinearLayout>
 

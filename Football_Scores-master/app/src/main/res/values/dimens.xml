@@ -7,4 +7,6 @@
     <dimen name="TeamNames">17sp</dimen>
     <dimen name="Score">30sp</dimen>
     <dimen name="League">15sp</dimen>
+
+    <dimen name="detail_card_elevation">6dp</dimen>
 </resources>

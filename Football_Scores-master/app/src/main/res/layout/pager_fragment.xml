@@ -24,14 +24,13 @@
                 android:layout_gravity="center_horizontal"
                 android:contentDescription="@string/app_name"
                 android:scaleType="center"
-                android:src="@drawable/ic_action_football_scores"/>
+                android:src="@drawable/scores"/>
         </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             app:tabMode="scrollable"/>
 
     </android.support.design.widget.AppBarLayout>
