@@ -28,8 +28,6 @@
     <!-- API related strings -->
     <!-- BASE URL for Football Data API -->
     <string name="base_url" translatable="false">http://api.football-data.org/alpha/fixtures</string>
-    <!-- API KEY (Not sure if it should be kept here) -->
-    <string name="api_key" translatable="false">af008aeb4f1d48fb9a58009b0d9a48e5</string>
     <!-- The API Key query parameter -->
     <string name="query_api_key" translatable="false">X-Auth-Token</string>
     <!-- The timeFrame query parameter -->

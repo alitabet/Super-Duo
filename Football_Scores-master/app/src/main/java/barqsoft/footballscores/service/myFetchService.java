@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.TimeZone;
 import java.util.Vector;
 
+import barqsoft.footballscores.BuildConfig;
 import barqsoft.footballscores.DatabaseContract;
 import barqsoft.footballscores.R;
 
@@ -64,8 +65,8 @@ public class myFetchService extends IntentService {
             URL fetch = new URL(fetch_build.toString());
             m_connection = (HttpURLConnection) fetch.openConnection();
             m_connection.setRequestMethod("GET");
-            m_connection.addRequestProperty(getString(R.string.query_api_key), getString(R.string.api_key));
-            m_connection.connect();
+            m_connection.addRequestProperty(getString(R.string.query_api_key), BuildConfig.FOOTBALL_DATA_API_KEY);
+                    m_connection.connect();
 
             // Read the input stream into a String
             InputStream inputStream = m_connection.getInputStream();
