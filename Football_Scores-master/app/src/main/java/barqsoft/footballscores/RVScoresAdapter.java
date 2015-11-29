@@ -57,7 +57,7 @@ public class RVScoresAdapter extends RecyclerView.Adapter<RVScoresAdapter.ViewHo
             home_name = (TextView) view.findViewById(R.id.home_name);
             away_name = (TextView) view.findViewById(R.id.away_name);
             score     = (TextView) view.findViewById(R.id.score_textview);
-            date      = (TextView) view.findViewById(R.id.data_textview);
+            date      = (TextView) view.findViewById(R.id.date_textview);
             home_crest = (ImageView) view.findViewById(R.id.home_crest);
             away_crest = (ImageView) view.findViewById(R.id.away_crest);
             container = (ViewGroup) view.findViewById(R.id.details_fragment_container);

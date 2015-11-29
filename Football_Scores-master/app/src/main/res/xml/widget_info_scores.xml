@@ -1,0 +1,11 @@
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:initialLayout="@layout/scores_app_widget"
+    android:minHeight="@dimen/widget_score_default_height"
+    android:minResizeHeight="@dimen/widget_score_min_resize_height"
+    android:minResizeWidth="@dimen/widget_score_min_resize_width"
+    android:minWidth="@dimen/widget_score_default_width"
+    android:previewImage="@drawable/ic_launcher"
+    android:resizeMode="horizontal"
+    android:updatePeriodMillis="0"
+    tools:ignore="UnusedAttribute" />

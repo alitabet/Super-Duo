@@ -33,6 +33,19 @@
                 android:value="barqsoft.footballscores.MainActivity" />
         </activity>
         <service android:name=".service.myFetchService" />
+
+        <!-- Today Widget -->
+        <receiver
+            android:name=".widget.ScoresWidgetProvider"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.example.android.football.app.ACTION_DATA_UPDATED" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_scores" />
+        </receiver>
+        <service android:name=".widget.ScoresWidgetIntentService" />
     </application>
 
 </manifest>

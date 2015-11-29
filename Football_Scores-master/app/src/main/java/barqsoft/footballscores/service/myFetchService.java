@@ -37,6 +37,8 @@ public class myFetchService extends IntentService {
     private final String NUM_DAYS = "2";
 
     public static final String LOG_TAG = "myFetchService";
+    public static final String ACTION_DATA_UPDATED =
+            "com.example.android.football.app.ACTION_DATA_UPDATED";
 
     public myFetchService() {
         super("myFetchService");
@@ -123,6 +125,14 @@ public class myFetchService extends IntentService {
         } catch (Exception e) {
             Log.e(LOG_TAG, e.getMessage());
         }
+    }
+
+    private void updateWidgets() {
+        Context context = getApplicationContext();
+        // Setting the package ensures that only components in our app will receive the broadcast
+        Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED)
+                .setPackage(context.getPackageName());
+        context.sendBroadcast(dataUpdatedIntent);
     }
 
     private void processJSONdata(String JSONdata, Context mContext, boolean isReal) {
@@ -257,7 +267,7 @@ public class myFetchService extends IntentService {
             values.toArray(insert_data);
             inserted_data = mContext.getContentResolver().bulkInsert(
                     DatabaseContract.BASE_CONTENT_URI, insert_data);
-
+            updateWidgets();
             //Log.v(LOG_TAG,"Succesfully Inserted : " + String.valueOf(inserted_data));
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage());
