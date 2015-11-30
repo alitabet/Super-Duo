@@ -101,7 +101,7 @@ public class Utility
 
         if(homeGoals < 0 || awayGoals < 0)
         {
-            return " - ";
+            return "";
         }
         else
         {

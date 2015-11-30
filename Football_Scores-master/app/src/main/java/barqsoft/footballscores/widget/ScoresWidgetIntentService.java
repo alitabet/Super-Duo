@@ -1,11 +1,16 @@
 package barqsoft.footballscores.widget;
 
+import android.annotation.TargetApi;
 import android.app.IntentService;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
+import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.widget.RemoteViews;
 
 import java.text.SimpleDateFormat;
@@ -38,14 +43,15 @@ public class ScoresWidgetIntentService extends IntentService {
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this,
                 ScoresWidgetProvider.class));
 
-        Date fragmentdate = new Date(System.currentTimeMillis());
+        Date fragmentdate = new Date(System.currentTimeMillis() - 86400000);
         SimpleDateFormat mformat = new SimpleDateFormat("yyyy-MM-dd");
 
         String date[] = new String[1];
         date[0] = mformat.format(fragmentdate);
 
-        Cursor data = getContentResolver().query(DatabaseContract.scores_table.buildScoreWithDate(),
-                null, null, date, null);
+        Cursor data = getContentResolver().query(DatabaseContract.BASE_CONTENT_URI, null, null, null, null);
+//                .query(DatabaseContract.scores_table.buildScoreWithDate(),
+//                null, null, date, null);
 
         if (data == null) {
             return;
@@ -74,7 +80,16 @@ public class ScoresWidgetIntentService extends IntentService {
 
         // Perform this loop procedure for each widget
         for (int appWidgetId : appWidgetIds) {
-            int layoutId = R.layout.scores_app_widget;
+//            int layoutId = R.layout.scores_app_widget;
+            // Find the correct layout based on the widget's width
+            int widgetWidth = getWidgetWidth(appWidgetManager, appWidgetId);
+            int defaultWidth = getResources().getDimensionPixelSize(R.dimen.widget_score_default_width);
+            int layoutId;
+           if (widgetWidth >= defaultWidth) {
+                layoutId = R.layout.scores_app_widget;
+            } else {
+                layoutId = R.layout.scores_app_widget_small;
+            }
             RemoteViews views = new RemoteViews(getPackageName(), layoutId);
 
             // Add the data to the RemoteViews
@@ -98,5 +113,28 @@ public class ScoresWidgetIntentService extends IntentService {
             // Tell the AppWidgetManager to perform an update on the current app widget
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
+    }
+
+    private int getWidgetWidth(AppWidgetManager appWidgetManager, int appWidgetId) {
+        // Prior to Jelly Bean, widgets were always their default size
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+            return getResources().getDimensionPixelSize(R.dimen.widget_score_default_width);
+        }
+        // For Jelly Bean and higher devices, widgets can be resized - the current size can be
+        // retrieved from the newly added App Widget Options
+        return getWidgetWidthFromOptions(appWidgetManager, appWidgetId);
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    private int getWidgetWidthFromOptions(AppWidgetManager appWidgetManager, int appWidgetId) {
+        Bundle options = appWidgetManager.getAppWidgetOptions(appWidgetId);
+        if (options.containsKey(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH)) {
+            int minWidthDp = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH);
+            // The width returned is in dp, but we'll convert it to pixels to match the other widths
+            DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+            return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, minWidthDp,
+                    displayMetrics);
+        }
+        return  getResources().getDimensionPixelSize(R.dimen.widget_score_default_width);
     }
 }
