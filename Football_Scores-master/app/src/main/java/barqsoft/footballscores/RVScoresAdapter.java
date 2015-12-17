@@ -78,14 +78,28 @@ public class RVScoresAdapter extends RecyclerView.Adapter<RVScoresAdapter.ViewHo
         final ViewHolder mHolder = holder;
         mHolder.home_name.setText(mCursor.getString(COL_HOME));
         mHolder.away_name.setText(mCursor.getString(COL_AWAY));
+
+        // Get the match time and adjust content description
+        // to inform user the full date and time of the game
         mHolder.date.setText(mCursor.getString(COL_MATCHTIME));
+        // TODO: Add content description 
+
+        // Get the game scores and set the appropriate content descriptions
         mHolder.score.setText(Utility.getScores(mCursor.getInt(COL_HOME_GOALS), mCursor.getInt(COL_AWAY_GOALS)));
+        mHolder.score.setContentDescription(Utility.getScoresContentDescription(
+                mContext,mCursor.getInt(COL_HOME_GOALS), mCursor.getInt(COL_AWAY_GOALS)));
+
         mHolder.match_id = mCursor.getDouble(COL_ID);
+
+        // Set the corresponding team images if available. Also, we want
+        // to set content descriptions for the images telling the user
+        // to which team the image belongs to
         mHolder.home_crest.setImageResource(Utility.getTeamCrestByTeamName(
                 mCursor.getString(COL_HOME)));
+        mHolder.home_crest.setContentDescription(mCursor.getString(COL_HOME));
         mHolder.away_crest.setImageResource(Utility.getTeamCrestByTeamName(
-                mCursor.getString(COL_AWAY)
-        ));
+                mCursor.getString(COL_AWAY)));
+        mHolder.away_crest.setContentDescription(mCursor.getString(COL_AWAY));
 
         mHolder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

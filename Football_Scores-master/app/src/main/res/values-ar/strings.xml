@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
+    <string name="app_name">مباريات كرة القدم</string>
+    <string name="today">اليوم</string>
+    <string name="tomorrow">غدا</string>
+    <string name="unknown_league_text_response">الدوري غير معروف الرجاء الإبلاغ</string>
+    <string name="yesterday">البارحة</string>
+    <string name="text_cl_semi_final">الدور نصف النهائي</string>
+    <string name="text_cl_quarter_final">الدورالربع النهائي</string>
+    <string name="text_cl_group_stages">مرحلة المجموعات</string>
+    <string name="text_cl_first_knockout_round">مرحلة المجموعات</string>
+    <string name="text_cl_final">نهائي</string>
+    <string name="league_name_champions_league">دوري أبطال أوروبا</string>
+    <string name="share_text">مشاركة </string>
+    <string name="league_name_bundesliga1">الدوري الألماني</string>
+    <string name="league_name_bundesliga2">الدوري الألماني ٢</string>
+    <string name="league_name_bundesliga3">الدوري الألماني ٣</string>
+    <string name="league_name_eredivisie">الدوري الهولندي</string>
+    <string name="league_name_ligue1">الدوري الفرنسي</string>
+    <string name="league_name_ligue2">الدوري الفرنسي ٢</string>
+    <string name="league_name_premier_league">الدوري الإنكليزي الممتاز</string>
+    <string name="league_name_primera_ligua">الدوري الإسباني</string>
+    <string name="league_name_seria_a">الدوري الإيطالي</string>
+    <string name="league_name_primera_divison">الدوري الاسباني الدرجة الأولى</string>
+    <string name="league_name_segunda_divison">الدوري الاسباني الدرجة الثانية</string>
+    <string name="about">حول</string>
+    <string name="about_text">هذا التطبيق للحصول على نتائج كرة القدم للدوري الممتاز، الدوري الإيطالي، الدوري الألماني، الدوري الاسباني و دوري أبطال أوروبا. يتم الحصول على جميع بيانات المباريات  مجانا من football-data.org .يتم الحصول على كل الشعارات فريق من http://hdlogo.wordpress.com عند طلب شكل إذن المالك.  تم إنشاء النسخة الأصلية من هذا التطبيق بواسطة يحيى خالد بن الوليد أحمد، و تعطى نسخة معدلة للطلاب في برنامج يودسيتي أندرويد نندجري. للإبلاغ عن أي البق، أو اقتراحات لا تتردد في إرسال بريد إلكتروني إلى ykibnelwalid@gmail.com .
+    </string>
+    <string name="action_settings">الإعدادات</string>
+    <string name="text_matchday">ا لجولة <xliff:g id="day">%d</xliff:g></string>
+    <string name="match_score_description">النتيجة <xliff:g id="home_score">%d</xliff:g> <xliff:g id="away_score">%d</xliff:g></string>
+    <string name="no_score_description">نتيجة مباراة غير متاحةنتيجة مباراة غير متاحة</string>
+</resources>

@@ -5,6 +5,7 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by yehya khaled on 3/3/2015.
@@ -62,7 +63,8 @@ public class Utility
             {
                 return context.getString(R.string.text_cl_group_stages)
                         + ", "
-                        + String.format(context.getString(R.string.text_matchday), matchDay);//Matchday: 6";
+                        + String.format(Locale.getDefault(), context.getString(R.string.text_matchday), matchDay);
+//                        + String.format(context.getString(R.string.text_matchday), matchDay);//Matchday: 6";
             }
             else if(matchDay == 7 || matchDay == 8)
             {
@@ -83,7 +85,8 @@ public class Utility
         }
         else
         {
-            return String.format(context.getString(R.string.text_matchday), matchDay);
+            return String.format(Locale.getDefault(), context.getString(R.string.text_matchday), matchDay);
+            //String.format(context.getString(R.string.text_matchday), matchDay);
         }
     }
 
@@ -103,10 +106,30 @@ public class Utility
         {
             return "";
         }
-        else
+
+        return String.format(Locale.getDefault(), "%d", homeGoals) + " - " + String.format(Locale.getDefault(), "%d", awayGoals);
+    }
+
+    /**
+     * Helper method to format a string containing the content
+     * description for the game score
+     *
+     * @param context Context to use for resource localization
+     * @param homeGoals Home team score
+     * @param awayGoals Away team score
+     * @return String containing the appropriate content description
+     */
+    public static String getScoresContentDescription(Context context, int homeGoals, int awayGoals)
+    {
+        // if the game is not finished yet inform the user
+        // that nos core is available
+
+        if(homeGoals < 0 || awayGoals < 0)
         {
-            return String.valueOf(homeGoals) + " - " + String.valueOf(awayGoals);
+            return context.getString(R.string.no_score_description);
         }
+
+        return String.format(Locale.getDefault(), context.getString(R.string.match_score_description), homeGoals, awayGoals);
     }
 
     /**

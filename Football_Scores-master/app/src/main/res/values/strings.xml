@@ -49,26 +49,30 @@
     <string name="league_code_champions_league" translatable="false">405</string>
 
     <!-- League names -->
-    <string name="league_name_bundesliga1" translatable="false">Bundesliga</string>
-    <string name="league_name_bundesliga2" translatable="false">Bundesliga</string>
-    <string name="league_name_bundesliga3" translatable="false">Bundesliga</string>
-    <string name="league_name_ligue1" translatable="false">League 1</string>
-    <string name="league_name_ligue2" translatable="false">League 2</string>
-    <string name="league_name_premier_league" translatable="false">Premier League</string>
-    <string name="league_name_primera_divison" translatable="false">Primera Division</string>
-    <string name="league_name_segunda_divison" translatable="false">Segunda Division</string>
-    <string name="league_name_seria_a" translatable="false">Serie A</string>
-    <string name="league_name_primera_ligua" translatable="false">Primeira Liga</string>
-    <string name="league_name_eredivisie" translatable="false">Eredivisie</string>
-    <string name="league_name_champions_league" translatable="false">UEFA Champions League</string>
+    <string name="league_name_bundesliga1">Bundesliga</string>
+    <string name="league_name_bundesliga2">Bundesliga 2</string>
+    <string name="league_name_bundesliga3">Bundesliga 3</string>
+    <string name="league_name_ligue1">League 1</string>
+    <string name="league_name_ligue2">League 2</string>
+    <string name="league_name_premier_league">Premier League</string>
+    <string name="league_name_primera_divison">Primera Division</string>
+    <string name="league_name_segunda_divison">Segunda Division</string>
+    <string name="league_name_seria_a">Serie A</string>
+    <string name="league_name_primera_ligua">Primeira Liga</string>
+    <string name="league_name_eredivisie">Eredivisie</string>
+    <string name="league_name_champions_league">UEFA Champions League</string>
 
     <!-- Text for unknown league number -->
     <string name="unknown_league_text_response">Not known League Please report</string>
     <!-- Text for matchday info displaying -->
-    <string name="text_matchday">Matchday: <xliff:g id="day">%1$s</xliff:g></string>
+    <string name="text_matchday">Matchday: <xliff:g id="day">%d</xliff:g></string>
     <string name="text_cl_group_stages">Group Stages</string>
     <string name="text_cl_first_knockout_round">First Knockout round</string>
     <string name="text_cl_quarter_final">QuarterFinal</string>
     <string name="text_cl_semi_final">SemiFinal</string>
     <string name="text_cl_final">Final</string>
+
+    <!-- Conten description for score-->
+    <string name="match_score_description">Game score is <xliff:g id="home_score">%d</xliff:g> <xliff:g id="away_score">%d</xliff:g></string>
+    <string name="no_score_description">Game score not available</string>
 </resources>
