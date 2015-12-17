@@ -2,6 +2,7 @@ package barqsoft.footballscores;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState)
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState)
     {
         Log.v(save_tag,"will retrive");
         Log.v(save_tag,"fragment: "+String.valueOf(savedInstanceState.getInt("Pager_Current")));

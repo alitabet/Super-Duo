@@ -72,7 +72,7 @@ public class myFetchService extends IntentService {
 
             // Read the input stream into a String
             InputStream inputStream = m_connection.getInputStream();
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder buffer = new StringBuilder();
             if (inputStream == null) {
                 // Nothing to do.
                 return;
@@ -84,7 +84,7 @@ public class myFetchService extends IntentService {
                 // Since it's JSON, adding a newline isn't necessary (it won't affect parsing)
                 // But it does make debugging a *lot* easier if you print out the completed
                 // buffer for debugging.
-                buffer.append(line + "\n");
+                buffer.append(line).append("\n");
             }
             if (buffer.length() == 0) {
                 // Stream was empty.  No point in parsing.
@@ -139,7 +139,7 @@ public class myFetchService extends IntentService {
         //JSON data
         // This set of league codes is for the 2015/2016 season. In fall of 2016, they will need to
         // be updated. Feel free to use the codes
-        final List<String> leagueCodes = new ArrayList<String>(
+        final List<String> leagueCodes = new ArrayList<>(
                 Arrays.asList(getResources().getStringArray(R.array.list_league_code_array)));
         //Arrays.asList(getResources().getStringArray(R.array.list_league_array));
         final String BUNDESLIGA1 = "394";

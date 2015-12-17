@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
 /**
  * Created by yehya khaled on 2/25/2015.
@@ -131,7 +132,7 @@ public class ScoresProvider extends ContentProvider
     }
 
     @Override
-    public int bulkInsert(Uri uri, ContentValues[] values)
+    public int bulkInsert(Uri uri, @NonNull ContentValues[] values)
     {
         SQLiteDatabase db = mOpenHelper.getWritableDatabase();
         //db.delete(DatabaseContract.SCORES_TABLE,null,null);
