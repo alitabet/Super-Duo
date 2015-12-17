@@ -27,7 +27,7 @@ public class RVScoresAdapter extends RecyclerView.Adapter<RVScoresAdapter.ViewHo
     public static final int COL_ID = 8;
     public static final int COL_MATCHTIME = 2;
     public double detail_match_id = 0;
-    private String FOOTBALL_SCORES_HASHTAG = "#Football_Scores";
+//    private String FOOTBALL_SCORES_HASHTAG = "#Football_Scores";
 
     private Cursor mCursor;
     final private Context mContext;
@@ -82,7 +82,8 @@ public class RVScoresAdapter extends RecyclerView.Adapter<RVScoresAdapter.ViewHo
         // Get the match time and adjust content description
         // to inform user the full date and time of the game
         mHolder.date.setText(mCursor.getString(COL_MATCHTIME));
-        // TODO: Add content description 
+        mHolder.date.setContentDescription(Utility.getMatchTimeDescription(mContext,
+                mCursor.getString(COL_DATE), mCursor.getString(COL_MATCHTIME)));
 
         // Get the game scores and set the appropriate content descriptions
         mHolder.score.setText(Utility.getScores(mCursor.getInt(COL_HOME_GOALS), mCursor.getInt(COL_AWAY_GOALS)));
@@ -100,6 +101,13 @@ public class RVScoresAdapter extends RecyclerView.Adapter<RVScoresAdapter.ViewHo
         mHolder.away_crest.setImageResource(Utility.getTeamCrestByTeamName(
                 mCursor.getString(COL_AWAY)));
         mHolder.away_crest.setContentDescription(mCursor.getString(COL_AWAY));
+
+        // Set a content description for the whole view
+        mHolder.mView.setContentDescription(Utility.getGameDescription(
+                mContext, mCursor.getString(COL_HOME), mCursor.getString(COL_AWAY),
+                mCursor.getInt(COL_HOME_GOALS), mCursor.getInt(COL_AWAY_GOALS),
+                mCursor.getString(COL_DATE), mCursor.getString(COL_MATCHTIME),
+                mCursor.getInt(COL_LEAGUE), mCursor.getInt(COL_MATCHDAY)));
 
         mHolder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,7 +156,7 @@ public class RVScoresAdapter extends RecyclerView.Adapter<RVScoresAdapter.ViewHo
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, ShareText + FOOTBALL_SCORES_HASHTAG);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, ShareText + mContext.getString(R.string.sharing_hashtag));
         return shareIntent;
     }
 

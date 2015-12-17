@@ -6,6 +6,7 @@ import android.text.format.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -134,6 +135,68 @@ public class Utility
         return String.format(Locale.getDefault(), context.getString(R.string.match_score_description), homeGoals, awayGoals);
     }
 
+    public static String getGameDescription(Context context, String home, String away, int homeScore, int awayScore, String date, String time, int leagueNum, int matchDay) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(getLeague(context, leagueNum));
+        builder.append(". ");
+        builder.append(getMatchDay(context, matchDay, leagueNum));
+        builder.append(". ");
+        builder.append(String.format(Locale.getDefault(),
+                context.getString(R.string.game_teams_description), home, away));
+        builder.append(". ");
+        builder.append(getMatchTimeDescription(context, date, time));
+        builder.append(". ");
+        builder.append(getScoresContentDescription(context, homeScore, awayScore));
+        builder.append(". ");
+        return "";
+    }
+
+    /**
+     * Helper method to set content description for game time
+     *
+     * @param context Context to use for resource localization
+     * @param date String date in format yyy-MM-dd
+     * @param time String time
+     * @return String containing the appropriate content description
+     */
+    public static String getMatchTimeDescription(Context context, String date, String time) {
+        return String.format(Locale.getDefault(), context.getString(R.string.game_date_description),
+                getDayNameFromDate(context, date), time);
+    }
+
+    /**
+     * Helper method to get the day name given the date
+     * formatted as yyyy-MM-dd
+     *
+     * @param context Context to use for resource localization
+     * @param dateString Date in format yyyy-MM-dd
+     * @return String name of requested day
+     */
+    public static String getDayNameFromDate(Context context, String dateString) {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Date date = new Date();
+        try {
+            date = formatter.parse(dateString);
+        } catch (Exception e) {
+            System.out.println("Property date formatter exception:"
+                    + e.getMessage());
+        }
+
+        long dateInMillis = date.getTime();
+
+        return getDayName(context, dateInMillis);
+
+    }
+
+    /**
+     * Helper method to get the day name given the date
+     * formatted in milliseconds
+     *
+     * @param context Context to use for resource localization
+     * @param dateInMillis Date in Milliseconds
+     * @return String name of requested day
+     */
     public static String getDayName(Context context, long dateInMillis) {
         // If the date is today, return the localized version of "Today" instead of the actual
         // day name.
