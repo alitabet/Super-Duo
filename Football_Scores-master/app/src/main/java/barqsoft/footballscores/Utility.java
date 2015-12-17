@@ -107,7 +107,7 @@ public class Utility
 
         if(homeGoals < 0 || awayGoals < 0)
         {
-            return "";
+            return " ";
         }
 
         return String.format(Locale.getDefault(), "%d", homeGoals) + " - " + String.format(Locale.getDefault(), "%d", awayGoals);
@@ -129,6 +129,7 @@ public class Utility
 
         if(homeGoals < 0 || awayGoals < 0)
         {
+//            return String.format(Locale.getDefault(), context.getString(R.string.match_score_description), 0, 0);
             return context.getString(R.string.no_score_description);
         }
 
@@ -148,7 +149,7 @@ public class Utility
         builder.append(". ");
         builder.append(getScoresContentDescription(context, homeScore, awayScore));
         builder.append(". ");
-        return "";
+        return builder.toString();
     }
 
     /**
@@ -248,7 +249,7 @@ public class Utility
             case "Sunderland AFC" : return R.drawable.sunderland;
             case "Stoke City FC" : return R.drawable.stoke_city;
             // Budnesliga
-            case "FC Bayern München" : return R.drawable.bayern_munchen;
+            case "FC Bayern Mï¿½nchen" : return R.drawable.bayern_munchen;
             case "Hamburger SV" : return R.drawable.hamburger;
             case "FC Augsburg" : return R.drawable.augsburg;
             case "Hertha BSC" : return R.drawable.hertha_berlin;
@@ -261,32 +262,32 @@ public class Utility
             case "Werder Bremen" : return R.drawable.werder_bremen;
             case "FC Schalke 04" : return R.drawable.schalke_04;
             case "Borussia Dortmund" : return R.drawable.borussia_dortmund;
-            case "Bor. Mönchengladbach" : return R.drawable.borussia_munchengladbach;
+            case "Bor. Mï¿½nchengladbach" : return R.drawable.borussia_munchengladbach;
             case "VfL Wolfsburg" : return R.drawable.wolfsburg;
             case "Eintracht Frankfurt" : return R.drawable.eintracht_frankfurt;
             case "VfB Stuttgart" : return R.drawable.vfb_stuttgart;
-            case "1. FC Köln" : return R.drawable.fc_koln;
+            case "1. FC Kï¿½ln" : return R.drawable.fc_koln;
             case "MSV Duisburg" : return R.drawable.msv_duisburg;
             case "1. FC Kaiserslautern" : return R.drawable.fc_kaiserslautern;
             case "Eintracht Braunschweig" : return R.drawable.eintracht_braunschweig;
             case "SV Sandhausen" : return R.drawable.sv_sandhausen;
             case "SC Freiburg" : return R.drawable.sc_freiburg;
-            case "1. FC Nürnberg" : return R.drawable.fc_nuremberg;
+            case "1. FC Nï¿½rnberg" : return R.drawable.fc_nuremberg;
             case "FSV Frankfurt" : return R.drawable.fsv_frankfurt;
             case "Red Bull Leipzig" : return R.drawable.rasenballsport_leipzig;
-            case "SpVgg Greuther Fürth" : return R.drawable.spvgg_greuther_forth;
+            case "SpVgg Greuther Fï¿½rth" : return R.drawable.spvgg_greuther_forth;
             case "Karlsruher SC" : return R.drawable.karlsruher;
             case "1. FC Heidenheim 1846" : return R.drawable.fc_heidenheim_1846;
-            case "TSV 1860 München" : return R.drawable.tsv_1860_munich;
+            case "TSV 1860 Mï¿½nchen" : return R.drawable.tsv_1860_munich;
             case "SC Paderborn 07" : return R.drawable.sc_paderborn;
             case "VfL Bochum" : return R.drawable.vfl_bochum;
             case "Arminia Bielefeld" : return R.drawable.arminia_bielefeld;
             case "1. FC Union Berlin" : return R.drawable.fc_union_berlin;
-            case "Fortuna Düsseldorf" : return R.drawable.fortuna_dusseldorf;
+            case "Fortuna Dï¿½sseldorf" : return R.drawable.fortuna_dusseldorf;
             case "FC St. Pauli" : return R.drawable.fc_st_pauli;
             // La Ligua
             case "FC Barcelona" : return R.drawable.barcelona;
-            case "Club Atlético de Madrid" : return R.drawable.atletico_madrid;
+            case "Club Atlï¿½tico de Madrid" : return R.drawable.atletico_madrid;
             case "Real Madrid CF" : return R.drawable.real_madrid;
             case "Valencia CF" : return R.drawable.valencia;
             default: return R.drawable.no_icon;

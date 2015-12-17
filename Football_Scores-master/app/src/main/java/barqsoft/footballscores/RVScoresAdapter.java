@@ -3,6 +3,7 @@ package barqsoft.footballscores;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -49,6 +51,7 @@ public class RVScoresAdapter extends RecyclerView.Adapter<RVScoresAdapter.ViewHo
         public ImageView away_crest;
         public double match_id;
         public ViewGroup container;
+        public LinearLayout linearLayout;
         public View mView;
 
         public ViewHolder(View view) {
@@ -61,6 +64,7 @@ public class RVScoresAdapter extends RecyclerView.Adapter<RVScoresAdapter.ViewHo
             home_crest = (ImageView) view.findViewById(R.id.home_crest);
             away_crest = (ImageView) view.findViewById(R.id.away_crest);
             container = (ViewGroup) view.findViewById(R.id.details_fragment_container);
+            linearLayout = (LinearLayout) view.findViewById(R.id.score_linear_layout);
         }
     }
 
@@ -76,34 +80,40 @@ public class RVScoresAdapter extends RecyclerView.Adapter<RVScoresAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         mCursor.moveToPosition(position);
         final ViewHolder mHolder = holder;
+
+        // We will set all the appropriate text and images for
+        // each view, and finally set a content description string
+        // for the whole view that summarizes the game details
         mHolder.home_name.setText(mCursor.getString(COL_HOME));
+        ViewCompat.setImportantForAccessibility(
+                mHolder.home_name,
+                ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_NO);
         mHolder.away_name.setText(mCursor.getString(COL_AWAY));
+        ViewCompat.setImportantForAccessibility(
+                mHolder.away_name,
+                ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_NO);
 
         // Get the match time and adjust content description
         // to inform user the full date and time of the game
         mHolder.date.setText(mCursor.getString(COL_MATCHTIME));
-        mHolder.date.setContentDescription(Utility.getMatchTimeDescription(mContext,
-                mCursor.getString(COL_DATE), mCursor.getString(COL_MATCHTIME)));
+        ViewCompat.setImportantForAccessibility(
+                mHolder.date,
+                ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_NO);
 
         // Get the game scores and set the appropriate content descriptions
         mHolder.score.setText(Utility.getScores(mCursor.getInt(COL_HOME_GOALS), mCursor.getInt(COL_AWAY_GOALS)));
-        mHolder.score.setContentDescription(Utility.getScoresContentDescription(
-                mContext,mCursor.getInt(COL_HOME_GOALS), mCursor.getInt(COL_AWAY_GOALS)));
+        ViewCompat.setImportantForAccessibility(
+                mHolder.score,
+                ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_NO);
 
         mHolder.match_id = mCursor.getDouble(COL_ID);
-
-        // Set the corresponding team images if available. Also, we want
-        // to set content descriptions for the images telling the user
-        // to which team the image belongs to
         mHolder.home_crest.setImageResource(Utility.getTeamCrestByTeamName(
                 mCursor.getString(COL_HOME)));
-        mHolder.home_crest.setContentDescription(mCursor.getString(COL_HOME));
         mHolder.away_crest.setImageResource(Utility.getTeamCrestByTeamName(
                 mCursor.getString(COL_AWAY)));
-        mHolder.away_crest.setContentDescription(mCursor.getString(COL_AWAY));
 
         // Set a content description for the whole view
-        mHolder.mView.setContentDescription(Utility.getGameDescription(
+        mHolder.linearLayout.setContentDescription(Utility.getGameDescription(
                 mContext, mCursor.getString(COL_HOME), mCursor.getString(COL_AWAY),
                 mCursor.getInt(COL_HOME_GOALS), mCursor.getInt(COL_AWAY_GOALS),
                 mCursor.getString(COL_DATE), mCursor.getString(COL_MATCHTIME),
@@ -130,9 +140,15 @@ public class RVScoresAdapter extends RecyclerView.Adapter<RVScoresAdapter.ViewHo
             mHolder.container.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
                     , ViewGroup.LayoutParams.MATCH_PARENT));
             TextView match_day = (TextView) v.findViewById(R.id.matchday_textview);
+            ViewCompat.setImportantForAccessibility(
+                    match_day,
+                    ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_NO);
             match_day.setText(Utility.getMatchDay(mContext, mCursor.getInt(COL_MATCHDAY),
                     mCursor.getInt(COL_LEAGUE)));
             TextView league = (TextView) v.findViewById(R.id.league_textview);
+            ViewCompat.setImportantForAccessibility(
+                    league,
+                    ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_NO);
             league.setText(Utility.getLeague(mContext, mCursor.getInt(COL_LEAGUE)));
             Button share_button = (Button) v.findViewById(R.id.share_button);
             share_button.setOnClickListener(new View.OnClickListener() {
