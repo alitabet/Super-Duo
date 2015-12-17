@@ -25,8 +25,10 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
     public static final int COL_HOME = 3;
     public static final int COL_AWAY = 4;
     public static final int COL_HOME_GOALS = 6;
+    public static final int COL_LEAGUE = 5;
     public static final int COL_AWAY_GOALS = 7;
     public static final int COL_ID = 8;
+    public static final int COL_MATCHDAY = 9;
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
@@ -98,9 +100,27 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                 views.setTextViewText(R.id.date_textview, date);
                 views.setTextViewText(R.id.time_textview, matchTime);
 
+                String description = Utility.getGameDescription(
+                        DetailWidgetRemoteViewsService.this, homeTeam, awayTeam,
+                        data.getInt(COL_HOME_GOALS), data.getInt(COL_AWAY_GOALS), date, matchTime,
+                        data.getInt(COL_LEAGUE), data.getInt(COL_MATCHDAY));
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+                    setRemoteContentDescription(views, description);
+                }
+//                views.setContentDescription(position, Utility.getGameDescription(
+//                        getApplicationContext(), homeTeam, awayTeam,
+//                        data.getInt(COL_HOME_GOALS), data.getInt(COL_AWAY_GOALS),
+//                        date, matchTime,
+//                        data.getInt(COL_LEAGUE), data.getInt(COL_MATCHDAY)));
                 final Intent fillInIntent = new Intent();
                 views.setOnClickFillInIntent(R.id.widget_list_item, fillInIntent);
                 return views;
+            }
+
+            @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
+            private void setRemoteContentDescription(RemoteViews views, String description) {
+                views.setContentDescription(R.id.widget, description);
             }
 
             @Override

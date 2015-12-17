@@ -26,11 +26,15 @@ import barqsoft.footballscores.Utility;
  */
 public class ScoresWidgetIntentService extends IntentService {
 
+    public static final int COL_DATE = 1;
     public static final int COL_MATCHTIME = 2;
     public static final int COL_HOME = 3;
     public static final int COL_AWAY = 4;
     public static final int COL_HOME_GOALS = 6;
+    public static final int COL_LEAGUE = 5;
     public static final int COL_AWAY_GOALS = 7;
+    public static final int COL_ID = 8;
+    public static final int COL_MATCHDAY = 9;
 
     public ScoresWidgetIntentService() {
         super("ScoresWidgetIntentService");
@@ -105,6 +109,16 @@ public class ScoresWidgetIntentService extends IntentService {
             views.setTextViewText(R.id.score_textview, score);
             views.setTextViewText(R.id.date_textview, matchTime);
 
+            String description = Utility.getGameDescription(
+                    this, homeTeam, awayTeam,
+                    data.getInt(COL_HOME_GOALS), data.getInt(COL_AWAY_GOALS),
+                    data.getString(COL_DATE), matchTime,
+                    data.getInt(COL_LEAGUE), data.getInt(COL_MATCHDAY));
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+                setRemoteContentDescription(views, description);
+            }
+
             // Create an Intent to launch MainActivity
             Intent launchIntent = new Intent(this, MainActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, launchIntent, 0);
@@ -113,6 +127,11 @@ public class ScoresWidgetIntentService extends IntentService {
             // Tell the AppWidgetManager to perform an update on the current app widget
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
+    }
+
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
+    private void setRemoteContentDescription(RemoteViews views, String description) {
+        views.setContentDescription(R.id.widget, description);
     }
 
     private int getWidgetWidth(AppWidgetManager appWidgetManager, int appWidgetId) {
