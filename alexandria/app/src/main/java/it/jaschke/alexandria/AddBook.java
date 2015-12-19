@@ -3,10 +3,12 @@ package it.jaschke.alexandria;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -29,7 +31,7 @@ import it.jaschke.alexandria.services.BookService;
 import it.jaschke.alexandria.services.DownloadImage;
 
 
-public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "INTENT_TO_SCAN_ACTIVITY";
     private EditText ean;
     private final int LOADER_ID = 1;
@@ -145,6 +147,24 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
         return rootView;
     }
 
+    // As our app now stores the server status in SharedPreferences, we
+    // will implement a shared preference listener to check when a change
+    // was made in shared preferences. We need to register the listener
+    // during onResume() and unregister it during onPause().
+    @Override
+    public void onResume() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sp.registerOnSharedPreferenceChangeListener(this);
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sp.unregisterOnSharedPreferenceChangeListener(this);
+        super.onPause();
+    }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -227,7 +247,7 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
             // is an internet connection
             if (!isNetworkAvailable(getActivity())) {
                 Toast.makeText(getActivity(), getResources().getString(
-                        R.string.empty_book_list_no_network), Toast.LENGTH_LONG)
+                        R.string.book_server_no_network), Toast.LENGTH_LONG)
                         .show();
             }
             return;
@@ -240,9 +260,14 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
         ((TextView) rootView.findViewById(R.id.bookSubTitle)).setText(bookSubTitle);
 
         String authors = data.getString(data.getColumnIndex(AlexandriaContract.AuthorEntry.AUTHOR));
-        String[] authorsArr = authors.split(",");
-        ((TextView) rootView.findViewById(R.id.authors)).setLines(authorsArr.length);
-        ((TextView) rootView.findViewById(R.id.authors)).setText(authors.replace(",","\n"));
+
+        // Check if there is a list of authors:
+        if (authors != null) {
+            String[] authorsArr = authors.split(",");
+            ((TextView) rootView.findViewById(R.id.authors)).setLines(authorsArr.length);
+            ((TextView) rootView.findViewById(R.id.authors)).setText(authors.replace(",", "\n"));
+        }
+
         String imgUrl = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
         if(Patterns.WEB_URL.matcher(imgUrl).matches()){
             new DownloadImage((ImageView) rootView.findViewById(R.id.bookCover)).execute(imgUrl);
@@ -290,5 +315,46 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
+    }
+
+    /**
+     * This function is adapted from the code provided by the
+     * the Sunshine App in the Advanced Android Development course.
+     * This function retrieves the server status from SharedPreferences.
+     *
+     * @param c Context used to get the SharedPreferences
+     * @return the server status integer type
+     */
+    @SuppressWarnings("ResourceType")
+    static public @BookService.BookStatus
+    int getServerStatus(Context c){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(c);
+        return sp.getInt(c.getString(R.string.pref_server_status_key), BookService.BOOK_STATUS_UNKNOWN);
+    }
+
+    // When SharedPreferences change we retrieve the new value of the
+    // server status and inform the user accordingly.
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if ( key.equals(getString(R.string.pref_server_status_key)) ) {
+            @BookService.BookStatus int serverStatus = getServerStatus(getActivity());
+            int message = R.string.empty_book_list;
+            switch (serverStatus) {
+                case BookService.BOOK_STATUS_SERVER_DOWN: // Server down
+                    message = R.string.book_server_down;
+                    break;
+                case BookService.BOOK_STATUS_SERVER_INVALID: // Error in data
+                    message = R.string.book_server_error;
+                    break;
+                default:
+                    if (!isNetworkAvailable(getActivity()) ) {
+                        message = R.string.book_server_no_network;
+                    }
+            }
+
+            Toast.makeText(getActivity(), getResources().getString(
+                    message), Toast.LENGTH_LONG)
+                    .show();
+        }
     }
 }

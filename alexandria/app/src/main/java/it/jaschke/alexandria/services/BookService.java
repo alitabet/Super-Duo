@@ -2,9 +2,13 @@ package it.jaschke.alexandria.services;
 
 import android.app.IntentService;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
+import android.preference.PreferenceManager;
+import android.support.annotation.IntDef;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
@@ -16,6 +20,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -37,6 +43,20 @@ public class BookService extends IntentService {
     public static final String DELETE_BOOK = "it.jaschke.alexandria.services.action.DELETE_BOOK";
 
     public static final String EAN = "it.jaschke.alexandria.services.extra.EAN";
+
+    // The following definitions will help track the status of the server.
+    // Tracking the server status will help us provide the user with better
+    // information when the data from the server is not available.
+    // NOTE: The code below was adapted from the code provided by the
+    // the Sunshine App in the Advanced Android Development course.
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({BOOK_STATUS_OK, BOOK_STATUS_SERVER_DOWN, BOOK_STATUS_SERVER_INVALID, BOOK_STATUS_UNKNOWN})
+    public @interface BookStatus {}
+
+    public static final int BOOK_STATUS_OK = 0;
+    public static final int BOOK_STATUS_SERVER_DOWN = 1;
+    public static final int BOOK_STATUS_SERVER_INVALID = 2;
+    public static final int BOOK_STATUS_UNKNOWN = 3;
 
     public BookService() {
         super("Alexandria");
@@ -123,14 +143,30 @@ public class BookService extends IntentService {
                 buffer.append(line);
                 buffer.append("\n");
             }
-
+            
             if (buffer.length() == 0) {
+                // If we get no response from the server then probably
+                // the server is down. We can inform the user about this
+                // problem and ask her to try again later
+                setBookServerStatus(getApplicationContext(), BOOK_STATUS_SERVER_DOWN);
                 return;
             }
             bookJsonString = buffer.toString();
             getBookDataFromJSON(ean, bookJsonString);
-        } catch (Exception e) {
+        } catch (IOException e) {
             Log.e(LOG_TAG, "Error ", e);
+            // If we get no response from the server then probably
+            // the server is down. We can inform the user about this
+            // problem and ask her to try again later
+            setBookServerStatus(getApplicationContext(), BOOK_STATUS_SERVER_DOWN);
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, "Error", e);
+            e.printStackTrace();
+            // If we have a problem parsing the JSON response then there is
+            // probably a change in the way the server is communicating with us.
+            // In such case we will inform the user to check for an update to
+            // the app which will probably have a solution to this error.
+            setBookServerStatus(getApplicationContext(), BOOK_STATUS_SERVER_INVALID);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -146,7 +182,8 @@ public class BookService extends IntentService {
         }
     }
 
-    private void getBookDataFromJSON(String ean, String bookJsonString) {
+    private void getBookDataFromJSON(String ean, String bookJsonString)
+            throws JSONException {
         final String ITEMS = "items";
 
         final String VOLUME_INFO = "volumeInfo";
@@ -198,8 +235,15 @@ public class BookService extends IntentService {
             if(bookInfo.has(CATEGORIES)){
                 writeBackCategories(ean,bookInfo.getJSONArray(CATEGORIES) );
             }
+            // If everything is good then set the server status to OK!
+            setBookServerStatus(getApplicationContext(), BOOK_STATUS_OK);
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Error ", e);
+            // If we have a problem parsing the JSON response then there is
+            // probably a change in the way the server is communicating with us.
+            // In such case we will inform the user to check for an update to
+            // the app which will probably have a solution to this error.
+            setBookServerStatus(getApplicationContext(), BOOK_STATUS_SERVER_INVALID);
         }
     }
 
@@ -231,5 +275,21 @@ public class BookService extends IntentService {
             getContentResolver().insert(AlexandriaContract.CategoryEntry.CONTENT_URI, values);
             values= new ContentValues();
         }
+    }
+
+    /**
+     * This function is adapted from the code provided by the
+     * the Sunshine App in the Advanced Android Development course.
+     * Sets the book server status into shared preference.
+     * This function should not be called from
+     * the UI thread because it uses commit to write to the shared preferences.
+     * @param c Context to get the PreferenceManager from.
+     * @param bookStatus The IntDef value to set
+     */
+    static private void setBookServerStatus(Context c, @BookStatus int bookStatus){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(c);
+        SharedPreferences.Editor spe = sp.edit();
+        spe.putInt(c.getString(R.string.pref_server_status_key), bookStatus);
+        spe.commit();
     }
  }
