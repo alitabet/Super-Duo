@@ -25,11 +25,13 @@
     <string name="back_button">go back</string>
     <string name="share_text">A must read book: </string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="about_text">This application gets book information from a Google API. All titles, cover images, and author information come from there.
     The original version of this app was built by Sascha Jaschke, and a modified version is given to students in the Udacity Android Nanodegree program. </string>
 
     <!-- Empty Book Database: This happens when the database is empty or doesn't contain books searched -->
     <string name="empty_book_list">There are no books that match your search criteria</string>
+    <!-- No internet connection! -->
+    <string name="empty_book_list_no_network">Oops! It seems the network is not available to fetch data, check your connectivity and try again</string>
 
 </resources>
