@@ -71,12 +71,12 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
 
             @Override
             public void afterTextChanged(Editable s) {
-                String ean =s.toString();
+                String ean = s.toString();
                 //catch isbn10 numbers
-                if(ean.length()==10 && !ean.startsWith("978")){
-                    ean="978"+ean;
+                if(ean.length() == 10 && !ean.startsWith("978")){
+                    ean = "978" + ean;
                 }
-                if(ean.length()<13){
+                if(ean.length() < 13){
                     clearFields();
                     return;
                 }
@@ -202,9 +202,9 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
         if(ean.getText().length()==0){
             return null;
         }
-        String eanStr= ean.getText().toString();
+        String eanStr = ean.getText().toString();
         if(eanStr.length()==10 && !eanStr.startsWith("978")){
-            eanStr="978"+eanStr;
+            eanStr = "978" + eanStr;
         }
         return new CursorLoader(
                 getActivity(),

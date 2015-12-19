@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +61,11 @@ public class ListOfBooks extends Fragment implements LoaderManager.LoaderCallbac
         );
 
         bookList = (ListView) rootView.findViewById(R.id.listOfBooks);
+        // Add an empty view to the ListView: This empty view will display
+        // information to the user when there is no book data avialable
+        // in the database
+        View emptyView = rootView.findViewById(R.id.listview_book_empty);
+        bookList.setEmptyView(emptyView);
         bookList.setAdapter(bookListAdapter);
 
         bookList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -128,6 +128,7 @@ public class BookService extends IntentService {
                 return;
             }
             bookJsonString = buffer.toString();
+            getBookDataFromJSON(ean, bookJsonString);
         } catch (Exception e) {
             Log.e(LOG_TAG, "Error ", e);
         } finally {
@@ -143,7 +144,9 @@ public class BookService extends IntentService {
             }
 
         }
+    }
 
+    private void getBookDataFromJSON(String ean, String bookJsonString) {
         final String ITEMS = "items";
 
         final String VOLUME_INFO = "volumeInfo";
@@ -195,7 +198,6 @@ public class BookService extends IntentService {
             if(bookInfo.has(CATEGORIES)){
                 writeBackCategories(ean,bookInfo.getJSONArray(CATEGORIES) );
             }
-
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Error ", e);
         }

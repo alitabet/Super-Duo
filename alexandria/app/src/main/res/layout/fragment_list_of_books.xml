@@ -45,7 +45,14 @@
                   android:layout_alignParentStart="true"
                   android:layout_toRightOf="@id/searchButton"/>
 
-
+        <!-- empty list: this view displays when the listview is empty -->
+        <TextView
+            android:id="@+id/listview_book_empty"
+            android:text="@string/empty_book_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/searchText"
+            android:layout_marginLeft="10dp" />
 
     </RelativeLayout>
 
