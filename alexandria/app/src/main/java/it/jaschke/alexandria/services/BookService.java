@@ -143,7 +143,7 @@ public class BookService extends IntentService {
                 buffer.append(line);
                 buffer.append("\n");
             }
-            
+
             if (buffer.length() == 0) {
                 // If we get no response from the server then probably
                 // the server is down. We can inform the user about this

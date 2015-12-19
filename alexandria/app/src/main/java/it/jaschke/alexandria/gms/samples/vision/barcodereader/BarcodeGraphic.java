@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package it.jaschke.alexandria;
+package it.jaschke.alexandria.gms.samples.vision.barcodereader;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -22,7 +22,7 @@ import android.graphics.RectF;
 
 import com.google.android.gms.vision.barcode.Barcode;
 
-import it.jaschke.alexandria.CameraPreview.GraphicOverlay;
+import it.jaschke.alexandria.gms.samples.vision.barcodereader.ui.camera.GraphicOverlay;
 
 /**
  * Graphic instance for rendering barcode position, size, and ID within an associated graphic

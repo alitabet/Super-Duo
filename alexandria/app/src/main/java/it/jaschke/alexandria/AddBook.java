@@ -27,6 +27,7 @@ import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 
 import it.jaschke.alexandria.data.AlexandriaContract;
+import it.jaschke.alexandria.gms.samples.vision.barcodereader.BarcodeCaptureActivity;
 import it.jaschke.alexandria.services.BookService;
 import it.jaschke.alexandria.services.DownloadImage;
 

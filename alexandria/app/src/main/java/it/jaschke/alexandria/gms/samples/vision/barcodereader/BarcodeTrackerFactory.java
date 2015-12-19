@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package it.jaschke.alexandria;
+package it.jaschke.alexandria.gms.samples.vision.barcodereader;
 
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.Tracker;
 import com.google.android.gms.vision.barcode.Barcode;
 
-import it.jaschke.alexandria.CameraPreview.GraphicOverlay;
+import it.jaschke.alexandria.gms.samples.vision.barcodereader.ui.camera.GraphicOverlay;
 
 /**
  * Factory for creating a tracker and associated graphic to be associated with a new barcode.  The

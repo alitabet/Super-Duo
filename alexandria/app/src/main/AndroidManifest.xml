@@ -36,7 +36,7 @@
                 android:value=".MainActivity" />
         </activity>
 
-        <activity android:name=".BarcodeCaptureActivity"
+        <activity android:name=".gms.samples.vision.barcodereader.BarcodeCaptureActivity"
             android:label="Read Barcode"/>
 
         <provider

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package it.jaschke.alexandria;
+package it.jaschke.alexandria.gms.samples.vision.barcodereader;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -39,9 +39,10 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
 
-import it.jaschke.alexandria.CameraPreview.CameraSource;
-import it.jaschke.alexandria.CameraPreview.CameraSourcePreview;
-import it.jaschke.alexandria.CameraPreview.GraphicOverlay;
+import it.jaschke.alexandria.gms.samples.vision.barcodereader.ui.camera.CameraSource;
+import it.jaschke.alexandria.gms.samples.vision.barcodereader.ui.camera.CameraSourcePreview;
+import it.jaschke.alexandria.gms.samples.vision.barcodereader.ui.camera.GraphicOverlay;
+import it.jaschke.alexandria.R;
 
 /**
  * Activity for the multi-tracker app.  This app detects barcodes and displays the value with the

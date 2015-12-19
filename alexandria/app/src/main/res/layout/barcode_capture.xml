@@ -8,16 +8,16 @@
     android:layout_height="match_parent"
     android:keepScreenOn="true">
 
-    <it.jaschke.alexandria.CameraPreview.CameraSourcePreview
+    <it.jaschke.alexandria.gms.samples.vision.barcodereader.ui.camera.CameraSourcePreview
         android:id="@+id/preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <it.jaschke.alexandria.CameraPreview.GraphicOverlay
+        <it.jaschke.alexandria.gms.samples.vision.barcodereader.ui.camera.GraphicOverlay
             android:id="@+id/graphicOverlay"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </it.jaschke.alexandria.CameraPreview.CameraSourcePreview>
+    </it.jaschke.alexandria.gms.samples.vision.barcodereader.ui.camera.CameraSourcePreview>
 
 </LinearLayout>
