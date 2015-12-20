@@ -24,3 +24,18 @@ The purpose of error checking is to both create a smooth UX, where the app does 
 
 ![Error Checking](/app_pics/alexandria2_small.png)
 
+## Football Scores
+
+The Football Scores app provides the user with schedule and results from football games in a 5 day time period. Although the app is fully functional, it can be enhanced in different ways. Here are the changes made to Football Scores to provide a richer user experience.
+
+### Material Design
+
+The new app improves in its look by implementing some concepts of Material Design. The main changes are in the color scheme of the app and a better implementation of the app bar. Below is a before and after look of Football Scores:
+
+![Football Scores Material Design](/app_pics/football_scores1.png)
+
+### Widgets
+
+The new Football Scores app comes with 2 possible widgets, one showing the closest upcoming game, and a collection widget. Snapshots of both widgets and some size specific looks are shown below:  
+
+![Football Scores Material Design](/app_pics/football_scores2.png)
