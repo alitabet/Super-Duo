@@ -73,7 +73,6 @@ public class ScoresWidgetIntentService extends IntentService {
                 data.getString(COL_HOME));
         int awayImageResource = Utility.getTeamCrestByTeamName(
                 data.getString(COL_AWAY));
-        data.close();
 
 //        String homeTeam = "Arsenal";
 //        String awayTeam = "Manchester United";
@@ -89,7 +88,7 @@ public class ScoresWidgetIntentService extends IntentService {
             int widgetWidth = getWidgetWidth(appWidgetManager, appWidgetId);
             int defaultWidth = getResources().getDimensionPixelSize(R.dimen.widget_score_default_width);
             int layoutId;
-           if (widgetWidth >= defaultWidth) {
+            if (widgetWidth >= defaultWidth) {
                 layoutId = R.layout.scores_app_widget;
             } else {
                 layoutId = R.layout.scores_app_widget_small;
@@ -127,6 +126,8 @@ public class ScoresWidgetIntentService extends IntentService {
             // Tell the AppWidgetManager to perform an update on the current app widget
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
+
+        data.close();
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
