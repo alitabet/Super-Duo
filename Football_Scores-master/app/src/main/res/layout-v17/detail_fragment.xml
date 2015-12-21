@@ -50,7 +50,8 @@
             android:gravity="center"
             android:paddingStart="120dp"
             android:paddingEnd="120dp"
-            android:text="@string/share_text" />
+            android:text="@string/share_text"
+            android:contentDescription="@string/share_text" />
     </FrameLayout>
 
 </LinearLayout>
