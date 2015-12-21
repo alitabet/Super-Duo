@@ -261,7 +261,6 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
         ((TextView) rootView.findViewById(R.id.bookSubTitle)).setText(bookSubTitle);
 
         String authors = data.getString(data.getColumnIndex(AlexandriaContract.AuthorEntry.AUTHOR));
-
         // Check if there is a list of authors:
         if (authors != null) {
             String[] authorsArr = authors.split(",");
